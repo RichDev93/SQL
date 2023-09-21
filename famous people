@@ -1,0 +1,171 @@
+/* Create table about the people and what they do here */
+-- Create the Famous People Table
+CREATE TABLE famous_people (
+id INTEGER PRIMARY KEY autoincrement,
+first_name TEXT, 
+last_name TEXT, 
+age INTEGER,
+gender TEXT,
+STARmeter INTEGER,
+STARrank_id INTEGER);
+
+INSERT INTO famous_people (first_name, last_name, age, gender, STARmeter,STARrank_id) VALUES ('Jami','Gertz','57','female','405', '4');
+INSERT INTO famous_people (first_name, last_name, age, gender, STARmeter,STARrank_id) VALUES ('Jerry','Seinfeld','69','male','208','10');
+INSERT INTO famous_people (first_name, last_name, age, gender, STARmeter, STARrank_id) VALUES ('Tyler','Perry','53','male','2221', '2');
+INSERT INTO famous_people (first_name, last_name, age, gender, STARmeter, STARrank_id) VALUES ('Dwayne','Johnson','51','male','15', '5');
+INSERT INTO famous_people (first_name, last_name, age, gender, STARmeter, STARrank_id) VALUES ('Oprah','Winfrey','69','female','2000', '7');
+INSERT INTO famous_people (first_name, last_name, age, gender, STARmeter, STARrank_id) VALUES ('Tom','Cruise','60','male','2', '9');
+INSERT INTO famous_people (first_name, last_name, age, gender, STARmeter, STARrank_id) VALUES ('George','Clooney','62','male','125', '6');
+INSERT INTO famous_people (first_name, last_name, age, gender, STARmeter, STARrank_id) VALUES ('Jessica', 'Alba','42','female','181', '1');
+INSERT INTO famous_people (first_name, last_name, age, gender, STARmeter, STARrank_id) VALUES ('Arnold','Schwarzenegger','75','male','30', '8');
+INSERT INTO famous_people (first_name, last_name, age, gender, STARmeter, STARrank_id) VALUES ('Robert','Downey','58','male','36', '3');
+
+
+
+CREATE TABLE leading_role (id INTEGER PRIMARY KEY autoincrement,
+    stars_id INTEGER,
+    movie TEXT,
+    release_year INTEGER,
+    imdb_score INTEGER);
+    
+INSERT INTO leading_role (stars_id, movie, release_year, imdb_score) VALUES ('9','The Terminator','1984','8.1');
+INSERT INTO leading_role (stars_id, movie, release_year, imdb_score) VALUES ('3','Diary of a Mad Black Woman','2005','5.1');
+INSERT INTO leading_role (stars_id, movie, release_year, imdb_score) VALUES ('1', 'Twister', '1996', '6.4');
+INSERT INTO leading_role (stars_id, movie, release_year, imdb_score) VALUES ('5', 'Selma', '2014', '7.5');
+INSERT INTO leading_role (stars_id, movie, release_year, imdb_score) VALUES ('7', 'Gravity', '2014', '7.7');
+
+CREATE TABLE supporting_role (id INTEGER PRIMARY KEY autoincrement, stars_id INTEGER,
+    movie TEXT,
+    release_year INTEGER,
+    imdb_score INTEGER);
+    
+INSERT INTO supporting_role (stars_id, movie, release_year, imdb_score) VALUES ('2', 'Bee movie', '2007', '6.1');
+INSERT INTO supporting_role (stars_id, movie, release_year, imdb_score) VALUES ('4', 'Fast Five', '2016', '7.5');
+INSERT INTO supporting_role (stars_id, movie, release_year, imdb_score) VALUES ('6', 'Mission impossible', '2001', '9');
+INSERT INTO supporting_role (stars_id, movie, release_year, imdb_score) VALUES ('8', 'Never been kissed before', '1999', '6.1');
+INSERT INTO supporting_role (stars_id, movie, release_year, imdb_score) VALUES ('10', 'End game', '2018', '9.7');
+
+
+CREATE TABLE joint_projects (
+    id INTEGER PRIMARY KEY,
+    stars_id INTEGER,
+    title TEXT
+);
+
+INSERT INTO joint_projects (stars_id, title)
+VALUES (2, 'The Terminator');
+INSERT INTO joint_projects (stars_id, title)
+VALUES (10, 'The Terminator');
+
+INSERT INTO joint_projects (stars_id, title)
+VALUES (3, 'Diary of a Mad Black Woman');
+INSERT INTO joint_projects (stars_id, title)
+VALUES (7, 'Diary of a Mad Black Woman');
+
+INSERT INTO joint_projects (stars_id, title)
+VALUES (1, 'Twister');
+INSERT INTO joint_projects (stars_id, title)
+VALUES (6, 'Twister');
+
+INSERT INTO joint_projects (stars_id, title)
+VALUES (5, 'Selma');
+INSERT INTO joint_projects (stars_id, title)
+VALUES (2, 'Selma');
+
+INSERT INTO joint_projects (stars_id, title)
+VALUES (7, 'Gravity');
+INSERT INTO joint_projects (stars_id, title)
+VALUES (1, 'Gravity');
+
+INSERT INTO joint_projects (stars_id, title)
+VALUES (9, 'Bee movie');
+INSERT INTO joint_projects (stars_id, title)
+VALUES (4, 'Bee movie');
+
+INSERT INTO joint_projects (stars_id, title)
+VALUES (4, 'Fast Five');
+INSERT INTO joint_projects (stars_id, title)
+VALUES (3, 'Fast Five');
+
+INSERT INTO joint_projects (stars_id, title)
+VALUES (6, 'Mission impossible');
+INSERT INTO joint_projects (stars_id, title)
+VALUES (9, 'Mission impossible');
+
+INSERT INTO joint_projects (stars_id, title)
+VALUES (8, 'Never been kissed before');
+INSERT INTO joint_projects (stars_id, title)
+VALUES (5, 'Never been kissed before');
+
+INSERT INTO joint_projects (stars_id, title)
+VALUES (10, 'End game');
+INSERT INTO joint_projects (stars_id, title)
+VALUES (8, 'End game');
+
+
+
+CREATE TABLE project_pairs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    star1_id INTEGER,
+    star2_id INTEGER);
+
+-- Example entries in the joint_projects table (10 rows)
+INSERT INTO project_pairs (star1_id, star2_id) VALUES (9, 3);
+INSERT INTO project_pairs (star1_id, star2_id) VALUES (3, 1);
+INSERT INTO project_pairs (star1_id, star2_id) VALUES (1, 5);
+INSERT INTO project_pairs (star1_id, star2_id) VALUES (5, 7);
+INSERT INTO project_pairs (star1_id, star2_id) VALUES (7, 2);
+INSERT INTO project_pairs (star1_id, star2_id) VALUES (2, 4);
+INSERT INTO project_pairs (star1_id, star2_id) VALUES (4, 6);
+INSERT INTO project_pairs (star1_id, star2_id) VALUES (6, 8);
+INSERT INTO project_pairs (star1_id, star2_id) VALUES (8, 10);
+INSERT INTO project_pairs (star1_id, star2_id) VALUES (9, 1);
+
+
+-- Insight: Who are the top 3 actors/actresses with the highest STARmeter ratings?
+SELECT first_name, last_name, STARmeter
+FROM famous_people
+ORDER BY STARmeter DESC
+LIMIT 3;
+
+-- Insight: Which movies did Tom Cruise star in, and what were their release years and IMDb scores?
+SELECT movie, release_year, imdb_score
+FROM leading_role
+WHERE stars_id = 6;
+
+-- Insight: List the joint projects that involved both Dwayne Johnson and George Clooney.
+SELECT jp.title
+FROM joint_projects jp
+INNER JOIN project_pairs pp ON jp.stars_id = pp.star1_id OR jp.stars_id = pp.star2_id
+WHERE (pp.star1_id = 4 AND pp.star2_id = 6) OR (pp.star1_id = 6 AND pp.star2_id = 4);
+
+-- Insight: Who are the actors/actresses who have starred in movies released after the year 2000 with IMDb scores above 7.0?
+SELECT DISTINCT fp.first_name, fp.last_name
+FROM famous_people fp
+JOIN leading_role lr ON fp.id = lr.stars_id
+WHERE lr.release_year > 2000 AND lr.imdb_score > 7.0;
+
+-- Insight: Which actor/actress has appeared in the most joint projects?
+SELECT fp.first_name, fp.last_name, COUNT(jp.id) AS joint_projects_count
+FROM famous_people fp
+JOIN joint_projects jp ON fp.id = jp.stars_id
+GROUP BY fp.id
+ORDER BY joint_projects_count DESC
+LIMIT 1;
+
+-- Insight: List the actors/actresses who have worked together in joint projects, and how many projects they have collaborated on.
+SELECT fp1.first_name AS star1_first_name, fp1.last_name AS star1_last_name,
+       fp2.first_name AS star2_first_name, fp2.last_name AS star2_last_name,
+       COUNT(pp.id) AS joint_projects_count
+FROM project_pairs pp
+JOIN famous_people fp1 ON pp.star1_id = fp1.id
+JOIN famous_people fp2 ON pp.star2_id = fp2.id
+GROUP BY star1_first_name, star1_last_name, star2_first_name, star2_last_name
+ORDER BY joint_projects_count DESC;
+
+-- Insight: Find the average IMDb score for movies in which each actor/actress played a leading role.
+SELECT fp.first_name, fp.last_name, AVG(lr.imdb_score) AS avg_imdb_score
+FROM famous_people fp
+LEFT JOIN leading_role lr ON fp.id = lr.stars_id
+GROUP BY fp.id
+ORDER BY avg_imdb_score DESC;
